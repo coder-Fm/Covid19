@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="style.css">
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <title>COVID-19 STATS - JAVASCRIPT</title>
+  </head>
+  <body>
+
+    <div class="container">
+
+      <section class="header-boxes">
+        <div class="title-box">
+          <a href="#" class="title"><img src="logo.png" style="width: 100px; height: 100px; margin-top: 0;">
+            COVID-19 LIVE STATS</a>
+        </div>
+      </section>
+
+      <div class="global-title">
+        Global
+      </div>
+
+      <section class="boxes">
+        <div class="box">
+          <div class="totalcases">
+            <ul><li><h3><i class="fas fa-virus" style="width: 20px; height: 20px; color: SteelBlue;"></i>
+               &nbsp;Total Cases</h3></li></ul>
+            <p id="confirmed"></p>
+          </div>
+          <hr>
+          <div class="newtotalcases">
+            <h6>New Cases</h6>
+            <p id="newconfirmed"></p>
+          </div>
+        </div>
+
+        <div class="box">
+          <div class="recovered">
+            <ul><li><h3><i class="fas fa-hospital-user" style="width: 20px; height: 20px; color: #fff;"></i>
+              &nbsp;Total Recovered</h3></li></ul>
+            <p id="recovered"></p>
+          </div>
+          <hr>
+          <div class="newrecovered">
+            <h6>New Recovered</h6>
+            <p id="newrecovered"></p>
+          </div>
+        </div>
+
+        <div class="box">
+          <div class="deaths">
+            <ul><li><h3><i class="fas fa-virus" style="width: 20px; height: 20px; color: #e54c10;"></i>
+                 &nbsp;Total Deaths</h3></li></ul>
+            <p id="deaths"></p>
+          </div>
+          <hr>
+          <div class="newdeaths">
+            <h6>New Deaths</h6>
+            <p id="newdeaths"></p>
+          </div>
+        </div>
+    </section>
+
+    <div class="country-title">
+
+    </div>
+
+    <section class="boxes">
+<!--
+      <div class="box">
+        <div class="country">
+          <div class="name"></div>
+          <div class="change-country"><i class="fas fa-globe" style="width: 15px; height: 15px; color: SteelBlue;"></i> Choose a country</div>
+          <div class="search-country hide">
+            <div class="search-box">
+              <input type="text" id="search-input" placeholder="Type a country name here">
+              <img class="close" src="close.svg" alt="Close" style="width: 10px; height: 10px; padding-right: 10px;">
+            </div>
+            <div class="country-list"></div>
+          </div>
+        </div>
+      </div>
+-->
+      <div class="box">
+        <div class="totalcases">
+          <ul><li><h4><i class="fas fa-virus" style="width: 20px; height: 20px; color: SteelBlue;"></i>
+             &nbsp;Total Cases</h4></li></ul>
+          <p id="s-confirmed"></p>
+        </div>
+        <hr>
+        <div class="newtotalcases">
+          <h6>New Cases</h6>
+          <p id="s-newconfirmed"></p>
+        </div>
+      </div>
+
+      <div class="box">
+        <div class="recovered">
+          <ul><li><h4><i class="fas fa-hospital-user" style="width: 20px; height: 20px; color: #fff;"></i>
+            &nbsp;Recovered</h4></li></ul>
+          <p id="s-recovered"></p>
+        </div>
+        <hr>
+        <div class="newrecovered">
+          <h6>New Recovered</h6>
+          <p id="s-newrecovered"></p>
+        </div>
+      </div>
+
+      <div class="box">
+        <div class="deaths">
+          <ul><li><h4><i class="fas fa-virus" style="width: 20px; height: 20px; color: #e54c10;"></i>
+               &nbsp;Deaths</h4></li></ul>
+          <p id="s-deaths"></p>
+        </div>
+        <hr>
+        <div class="newdeaths">
+          <h6>New Deaths</h6>
+          <p id="s-newdeaths"></p>
+        </div>
+      </div>
+
+    </section>
+
+
+    <section class="info">
+      <div>
+        <div class="chart">
+          <canvas id="Chart"></canvas>
+        </div>
+      </div>
+    </section>
+<!--
+      <table class="table table-hover">
+
+        <thead>
+          <tr>
+            <th>Total Cases</th>
+            <th>Total Deaths</th>
+            <th>Total Recovered</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr id="data">
+
+          </tr>
+        </tbody>
+
+      </table>
+
+      <br>
+      <button onclick="refreshData()" class="btn btn-danger btn-block">
+        Refresh Data
+      </button>
+    </div>
+
+-->
+  <script src="app.js"></script>
+  <!--<script src="events.js"></script>-->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.1/css/all.css" integrity="sha384-xxzQGERXS00kBmZW/6qxqJPyxW3UR0BPsL4c8ILaIWXva5kFi7TxkIIaMiKtqV1Q" crossorigin="anonymous">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+  </body>
+</html>
