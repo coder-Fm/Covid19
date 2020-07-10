@@ -206,3 +206,42 @@ body {
   -webkit-text-stroke-color: #e54c10;
   vertical-align: middle;
 }
+
+@media screen and (max-width: 1171px) {
+  .boxes {
+    grid-template-columns: repeat(3, 1fr);
+    }
+  }
+@media screen and (min-width: 769px) and (max-width: 1170px) {
+  .boxes {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media screen and (max-width: 768px) {
+  wrapper {
+    align-items: center;
+    text-align: center;
+  }
+}
+@media screen and (min-width: 440px) and (max-width: 767px) {
+  .boxes {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+@media screen and (max-width: 439px) {
+  wrapper {
+    align-items: center;
+    text-align: center;
+  }
+}
+@media screen and (min-width: 60px) and (max-width: 438px) {
+  .boxes {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+@media screen and (max-width: 59px) {
+  wrapper {
+    align-items: center;
+    text-align: center;
+  }
+}
