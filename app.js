@@ -1,8 +1,8 @@
-//const country_name_element = document.querySelector(".country .name");
-const url = "https://api.covid19api.com/summary";
-const country_url = "https://api.covid19api.com/total/country/";
 const ctx = document.getElementById("Chart").getContext("2d");
 const monthsNames = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
+
+const country_url = "https://api.covid19api.com/total/country/";
+var country_name;
 
 let app_data = [],
 cases_list = [],
@@ -13,39 +13,14 @@ formatedDates = [];
 
 // Initial Data
 init();
-//axesLinearChart();
 
 function init() {
-
-  var country_name;
   var user_input = prompt("Please Enter a Country: ");
   if (user_input != null) {
     country_name = country_url+user_input;
-    //console.log(country_name);
   }
 
-  $.get(url, function(data) {
-
-
-    let TotalConfirmed = (data.Global.TotalConfirmed).toLocaleString();
-    $("#confirmed").html(TotalConfirmed);
-    let TotalRecovered  = (data.Global.TotalRecovered).toLocaleString();
-    $("#recovered").html(TotalRecovered);
-    let TotalDeaths  = (data.Global.TotalDeaths).toLocaleString();
-    $("#deaths").html(TotalDeaths);
-    let NewConfirmed = (data.Global.NewConfirmed).toLocaleString();
-    $("#newconfirmed").html("+" + NewConfirmed);
-    let NewRecovered = (data.Global.NewRecovered).toLocaleString();
-    $("#newrecovered").html("+" + NewRecovered);
-    let NewDeaths = (data.Global.NewDeaths).toLocaleString();
-    $("#newdeaths").html("+" + NewDeaths);
-
-  });
-
-
-
   $.get(country_name, function(DATA) {
-    //console.log(DATA);
 
     let last_entry = DATA.length - 1;
     let before_last_entry = DATA.length - 2;
@@ -56,38 +31,43 @@ function init() {
 
     let Confirmed = (DATA[last_entry].Confirmed).toLocaleString();
     $("#s-confirmed").html(Confirmed);
-    let CountryNewConfirmed = (DATA[last_entry].Confirmed - DATA[before_last_entry].Confirmed).toLocaleString() || 0;
-    $("#s-newconfirmed").html("+"+CountryNewConfirmed);
+
+    let CountryNewConfirmed = (DATA[last_entry].Confirmed - DATA[before_last_entry].Confirmed).toLocaleString();
+    if ((CountryNewConfirmed < 0) || (CountryNewConfirmed = Confirmed)) {
+      CountryNewConfirmed = 0;
+      $("#s-newconfirmed").html("+"+CountryNewConfirmed);
+    } else {
+      $("#s-newconfirmed").html("+"+CountryNewConfirmed);
+    }
 
     let Recovered = (DATA[last_entry].Recovered).toLocaleString();
-    let CountryNewRecovered = (DATA[last_entry].Recovered - DATA[before_last_entry].Recovered).toLocaleString() || 0;
-    if (Recovered <= 0) {
-      Recovered = (DATA[before_last_entry].Recovered).toLocaleString();
+    $("#s-recovered").html("+"+Recovered);
+
+    let CountryNewRecovered = (DATA[last_entry].Recovered - DATA[before_last_entry].Recovered).toLocaleString();
+    if ((CountryNewRecovered < 0) || (CountryNewRecovered = Recovered)) {
       CountryNewRecovered = 0;
       $("#s-newrecovered").html("+"+CountryNewRecovered);
-      $("#s-recovered").html(Recovered); }
+    } else {
+      $("#s-newrecovered").html("+"+CountryNewRecovered);
+    }
 
-    let CountryNewDeaths = (DATA[last_entry].Deaths - DATA[before_last_entry].Deaths).toLocaleString() || 0;
     let Deaths = (DATA[last_entry].Deaths).toLocaleString();
-    if (Deaths <= 0) {
-      Deaths = (DATA[before_last_entry].Deaths).toLocaleString();
+    $("#s-deaths").html(Deaths);
+
+    let CountryNewDeaths = (DATA[last_entry].Deaths - DATA[before_last_entry].Deaths).toLocaleString();
+    if ((CountryNewDeaths < 0) || (CountryNewDeaths = Deaths)) {
       CountryNewDeaths = 0;
       $("#s-newdeaths").html("+"+CountryNewDeaths);
-      $("#s-deaths").html(Deaths); }
+    } else {
+      $("#s-newdeaths").html("+"+CountryNewDeaths);
+    }
 
-  });
-
-  $.get(country_name, function(data) {
     cases_list = [], recovered_list =[], deaths_list = [], dates = [], formatedDates = [];
-    for (var current = 0; current in data; current++) {
-      dates.push(data[current].Date);
-      cases_list.push(data[current].Confirmed).toLocaleString();
-      recovered_list.push(data[current].Recovered).toLocaleString();
-      deaths_list.push(data[current].Deaths).toLocaleString();
-      //formatedDates.push(`${monthsNames[dates.getMonth()]}/${dates.getDate()}`);
-      //dates.push((data[current].Date).getDate() + "/" + (data[current].Date).getMonth() + 1);
-
-      //console.log(dates);
+    for (var current = 0; current in DATA; current++) {
+      dates.push(DATA[current].Date);
+      cases_list.push(DATA[current].Confirmed).toLocaleString();
+      recovered_list.push(DATA[current].Recovered).toLocaleString();
+      deaths_list.push(DATA[current].Deaths).toLocaleString();
 
       let my_chart;
 
@@ -152,7 +132,7 @@ function init() {
                 pointRadius: 1,
                 pointHitRadius: 10
               }],
-              labels: dates//formatedDates
+              labels: dates
             },
               options: {
                 responsive : true,
@@ -163,4 +143,4 @@ function init() {
           }
      });
 
-} // end of init
+} 
